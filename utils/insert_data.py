@@ -1,0 +1,295 @@
+import sqlite3
+
+# Connect to the SQLite database (creates it if not exists)
+conn = sqlite3.connect('instance/database.db')
+cursor = conn.cursor()
+
+# Create a table for situations
+cursor.execute('''CREATE TABLE IF NOT EXISTS situation (
+                    situation_id INTEGER PRIMARY KEY,
+                    en TEXT,
+                    ru TEXT,
+                    kz TEXT,
+                    description_en TEXT,
+                    description_ru TEXT,
+                    description_kz TEXT,
+                    animation TEXT
+                )''')
+
+# Create a table for sentences
+cursor.execute('''CREATE TABLE IF NOT EXISTS sentence (
+                    sentence_id INTEGER PRIMARY KEY,
+                    en TEXT,
+                    ru TEXT,
+                    kz TEXT,
+                    audio TEXT,
+                    situation_id INTEGER,
+                    FOREIGN KEY (situation_id) REFERENCES situation (situation_id)
+                )''')
+
+# Data to be inserted
+data = {
+    "situations": [
+        {
+            "situation_id": 1,
+            "en": "In the hospital",
+            "ru": "В больнице",
+            "kz": "Ауруханада",
+            "description": {
+                "en": "You are at the hospital. You need medical assistance.",
+                "ru": "Вы в больнице. Вам нужна медицинская помощь.",
+                "kz": "Сіз аурухандасыз. Сізге медициналық көмек қажет."
+            },
+            "animation": "doctor.json"
+        },
+        {
+            "situation_id": 2,
+            "en": "At the police station",
+            "ru": "В полицейском участке",
+            "kz": "Полиция бөлімінде",
+            "description": {
+                "en": "You are at the police station. You need to report an incident or seek assistance from the police.",
+                "ru": "Вы в полицейском участке. Вам нужно сообщить о происшествии или обратиться за помощью к полиции.",
+                "kz": "Сіз полиция бөліміндеңіз. Сізге орындық жағдай туралы хабарлау керек немесе полицияға көмек керек."
+            },
+            "animation": "police.json"
+        },
+        {
+            "situation_id": 3,
+            "en": "At the shop",
+            "ru": "В магазине",
+            "kz": "Дүкенде",
+            "description": {
+                "en": "You are at the shop. You need to buy groceries or other items.",
+                "ru": "Вы в магазине. Вам нужно купить продукты или другие товары.",
+                "kz": "Сіз дүкендеңіз. Сізге азық-түліктер немесе басқа өнімдер сатып алу керек."
+            },
+            "animation": "shop.json"
+        },
+        {
+            "situation_id": 4,
+            "en": "At the airport",
+            "ru": "В аэропорту",
+            "kz": "Авиапортында",
+            "description": {
+                "en": "You are at the airport. You need to catch a flight or inquire about travel information.",
+                "ru": "Вы в аэропорту. Вам нужно поймать рейс или узнать информацию о путешествии.",
+                "kz": "Сіз авиапортыңыздаңыз. Сізге рейс туралы ақпарат алу немесе ұшық табу керек."
+            },
+            "animation": "airport.json"
+        }
+    ],
+    "sentences": [
+        {
+            "en": "Hello",
+            "kz": "Сәлем",
+            "ru": "Привет",
+            "audio": "hello.mp3",
+            "situation_id": 1
+        },
+        {
+            "en": "How are you?",
+            "kz": "Қалайсыз?",
+            "ru": "Как дела?",
+            "audio": "how_are_you.mp3",
+            "situation_id": 1
+        },
+        {
+            "en": "I need help",
+            "kz": "Маған көмек керек",
+            "ru": "Мне нужна помощь",
+            "audio": "i_need_help.mp3",
+            "situation_id": 1
+        },
+        {
+            "en": "Where is the doctor?",
+            "kz": "Дәрігер қайда?",
+            "ru": "Где доктор?",
+            "audio": "where_is_doctor.mp3",
+            "situation_id": 1
+        },
+        {
+            "en": "I feel pain",
+            "kz": "Мен ауырып тұрмын",
+            "ru": "Мне больно",
+            "audio": "i_feel_pain.mp3",
+            "situation_id": 1
+        },
+        {
+            "en": "Please help me",
+            "kz": "Маған көмектесіңізші",
+            "ru": "Помогите мне, пожалуйста",
+            "audio": "please_help_me.mp3",
+            "situation_id": 1
+        },
+        {
+            "en": "How to get to the hospital?",
+            "kz": "Ауруханаға қалай жетуге болады?",
+            "ru": "Как добраться до больницы?",
+            "audio": "how_to_get_to_hospital.mp3",
+            "situation_id": 1
+        },
+        {
+            "en": "Where is the pharmacy?",
+            "kz": "Дәріхана қайда?",
+            "ru": "Где аптека?",
+            "audio": "where_is_pharmacy.mp3",
+            "situation_id": 1
+        },
+        {
+            "en": "At the police station",
+            "kz": "Полиция бөлімінде",
+            "ru": "В полицейском участке",
+            "audio": "at_the_police_station.mp3",
+            "situation_id": 2
+        },
+        {
+            "en": "I lost my passport",
+            "kz": "Мен паспортымды жоғалтып алдым",
+            "ru": "Я потерял паспорт",
+            "audio": "i_lost_my_passport.mp3",
+            "situation_id": 2
+        },
+        {
+            "en": "I need to report a crime",
+            "kz": "Мен қылмыс туралы хабарлауым керек",
+            "ru": "Мне нужно сообщить о преступлении",
+            "audio": "i_need_to_report_a_crime.mp3",
+            "situation_id": 2
+        },
+        {
+            "en": "Where is the police station?",
+            "kz": "Полиция бөлімшесі қайда?",
+            "ru": "Где полицейский участок?",
+            "audio": "where_is_police_station.mp3",
+            "situation_id": 2
+        },
+        {
+            "en": "I was robbed",
+            "kz": "Мен тонауға ұшырадым",
+            "ru": "Меня ограбили",
+            "audio": "i_was_robbed.mp3",
+            "situation_id": 2
+        },
+        {
+            "en": "Help, I need a police officer",
+            "kz": "Көмектесіңізші, маған полиция қызметкері қажет",
+            "ru": "Помогите, мне нужен полицейский",
+            "audio": "help_i_need_police.mp3",
+            "situation_id": 2
+        },
+        {
+            "en": "Where is the nearest police station?",
+            "kz": "Ең жақын полиция бөлімшесі қайда?",
+            "ru": "Где ближайший полицейский участок?",
+            "audio": "nearest_police_station.mp3",
+            "situation_id": 2
+        },
+        {
+            "en": "I need legal assistance",
+            "kz": "Маған заңгерлік көмек қажет",
+            "ru": "Мне нужна юридическая помощь",
+            "audio": "legal_assistance.mp3",
+            "situation_id": 2
+        },
+        {
+            "en": "Where is the shop?",
+            "kz": "Дүкен қайда?",
+            "ru": "Где магазин?",
+            "audio": "where_is_shop.mp3",
+	        "situation_id": 3
+	    },
+	    {
+	        "en": "I need to buy groceries",
+	        "kz": "Маған азық-түлік сатып алу керек",
+	        "ru": "Мне нужно купить продукты",
+	        "audio": "buy_groceries.mp3",
+	        "situation_id": 3
+	    },
+	    {
+	        "en": "Do you have milk?",
+	        "kz": "Сізде сүт бар ма?",
+	        "ru": "У вас есть молоко?",
+	        "audio": "do_you_have_milk.mp3",
+	        "situation_id": 3
+	    },
+	    {
+	        "en": "How much does it cost?",
+	        "kz": "Бұл қанша тұрады?",
+	        "ru": "Сколько это стоит?",
+	        "audio": "how_much.mp3",
+	        "situation_id": 3
+	    },
+	    {
+	        "en": "Where is the checkout?",
+	        "kz": "Касса қайда?",
+	        "ru": "Где касса?",
+	        "audio": "where_is_checkout.mp3",
+	        "situation_id": 3
+	    },
+	    {
+	        "en": "Can I pay by card?",
+	        "kz": "Мен картамен төлей аламын ба?",
+	        "ru": "Можно оплатить картой?",
+	        "audio": "pay_by_card.mp3",
+	        "situation_id": 3
+	    },
+	    {
+	        "en": "Do you have a discount?",
+	        "kz": "Сізде жеңілдік бар ма?",
+	        "ru": "У вас есть скидка?",
+	        "audio": "discount.mp3",
+	        "situation_id": 3
+	    },
+	    {
+	        "en": "Thank you",
+	        "kz": "Рақмет",
+	        "ru": "Спасибо",
+	        "audio": "thank_you.mp3",
+	        "situation_id": 3
+	    },
+	    {
+            "en": "Where is the check-in counter?",
+            "kz": "Чек-ин қайда?",
+            "ru": "Где стойка регистрации?",
+            "audio": "where_is_checkin_counter.mp3",
+            "situation_id": 4
+        },
+        {
+            "en": "I need to check my luggage",
+            "kz": "Багажымды тексеру керек",
+            "ru": "Мне нужно проверить багаж",
+            "audio": "i_need_to_check_luggage.mp3",
+            "situation_id": 4
+        },
+        {
+            "en": "Can you help me find my gate?",
+            "kz": "Шығарма мүдделін тапсыруда көмек көрсетесіз бе?",
+            "ru": "Вы можете помочь мне найти свою ворота?",
+            "audio": "help_find_gate.mp3",
+            "situation_id": 4
+        }
+]
+}
+
+# Insert data into the 'situations' table
+for situation in data['situations']:
+    cursor.execute('''INSERT INTO situation 
+                      (situation_id, en, ru, kz, description_en, description_ru, description_kz, animation) 
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+                   (situation['situation_id'], situation['en'], situation['ru'], situation['kz'],
+                    situation['description']['en'], situation['description']['ru'], situation['description']['kz'],
+                    situation['animation']))
+
+# Insert data into the 'sentences' table
+for sentence in data['sentences']:
+    cursor.execute('''INSERT INTO sentence 
+                      (en, ru, kz, audio, situation_id) 
+                      VALUES (?, ?, ?, ?, ?)''',
+                   (sentence['en'], sentence['ru'], sentence['kz'], sentence['audio'], sentence['situation_id']))
+
+# Commit changes and close the connection
+conn.commit()
+conn.close()
+
+print("Data has been inserted into the database.")

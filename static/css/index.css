@@ -1,0 +1,260 @@
+html,
+body {
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 100%;
+
+    line-height: 1.6;
+    color: var(--paragraph-color);
+    font-weight: 500;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.top-bar {
+    background: var(--top-bar-background-color);
+    border-bottom: 1px solid var(--top-bar-line-color);
+    padding: 10px 50px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.top-bar h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--container-color);
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+
+    scrollbar-color: var(--paragraph-color) var(--container-color);
+    scrollbar-width: thin;
+    scroll-padding-top: 65px;
+}
+
+.content {
+    padding: 25px 50px;
+}
+
+h1,
+h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #000;
+    font-size: 32px;
+    font-weight: 600;
+    margin: 10px 0;
+    line-height: normal;
+}
+
+a:has(h2) {
+    text-decoration: none;
+    color: #000;
+}
+
+a h2::before {
+    content: '';
+    display: flex;
+    background: url(https://img.icons8.com/sf-regular/48/8C8FA8/link.png);
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+    background-size: cover;
+    margin: 4px 0;
+    margin-right: 10px;
+    float: left;
+}
+
+a h2:hover,
+a h2:active {
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+}
+
+button {
+    border: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 50px;
+    transition: box-shadow .5s;
+}
+
+button:hover, button:active {
+    box-shadow: 0 2px 5px #00000050;
+}
+
+.section {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.chart-container {
+    width: 100%;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.chart-container canvas {
+    max-width: 45%;
+    margin-right: 5%;
+}
+
+.animation-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.blocks ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 0;
+}
+
+.blocks li {
+    padding: 16px;
+    background: var(--blocks-background);
+    border-radius: 8px;
+    display: block;
+
+    flex: 0 0 calc((100% / 4) + 50px);
+}
+
+.blocks li b {
+    font-size: 20px;
+    color: #000;
+}
+
+.blocks li p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.blocks li img {
+    max-width: 128px;
+    min-width: 128px;
+    max-height: 128px;
+    min-height: 128px;
+}
+
+.lif li {
+    display: flex;
+}
+
+.lif li img {
+    max-width: 64px;
+    min-width: 64px;
+    max-height: 64px;
+    min-height: 64px;
+
+    margin-right: 8px;
+}
+
+.lif li p {
+    font-size: 14px;
+}
+
+.window {
+    width: 100%;
+    height: 100%;
+    background: #00000010;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.window-child {
+    width: 100%;
+    max-width: 800px;
+    padding: 10px;
+    margin: 10px;
+    background: #fff;
+    border-radius: 15px;
+    max-width: 500px;
+}
+
+.window-child .close img {
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+    padding: 10px;
+    background: var(--blocks-background);
+    border-radius: 50%;
+    margin: 0;
+    margin-left: auto;
+}
+
+.window-child .close {
+    display: flex;
+}
+
+.window-child img {
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    margin-bottom: 65px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media only screen and (max-width: 800px) {
+
+    .chart-container,
+    .animation-container {
+        max-width: 100%;
+        display: block;
+    }
+
+    .chart-container canvas {
+        max-width: 100%;
+        max-height: 300px;
+        margin-bottom: 30px;
+    }
+
+    .blocks li {
+        flex: 0 0 calc((100% / 3));
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .blocks li {
+        flex: 0 0 100%;
+    }
+}

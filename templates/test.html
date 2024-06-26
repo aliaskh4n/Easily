@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottie Animation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--background-color);
+
+            line-height: 1.6;
+            color: var(--paragraph-color);
+            font-weight: 500;
+        }
+
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+            overflow: hidden;
+            background: var(--container-color);
+        }
+
+        .header {
+            background: var(--container-color);
+            border-bottom: 1px solid var(--top-bar-line-color);
+            padding: 10px 50px;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .search-parent {
+            width: 100%;
+            height: 50px;
+            border-radius: 25px;
+            padding: 0 20px;
+            background: #ECEDF5;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-parent img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .search-parent input {
+            width: 100%;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background: none;
+        }
+
+        .search-parent:has(input:focus) {
+            border-color: #3849EA;
+        }
+
+        .texts {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .lang {
+            padding: 2px 20px;
+            background-color: #EFF0F6;
+            margin-left: 10px;
+            border-radius: 50px;
+            font-weight: 800;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #3849EA;
+            margin: 0;
+            float: left;
+        }
+
+        .buttons {
+            scroll-snap-type: y mandatory;
+            width: 100%;
+            flex-grow: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: white;
+        }
+
+        .button {
+            padding: 20px;
+            margin: 20px;
+            margin-bottom: 0;
+            background: var(--container-color);
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover, .button:active {
+            background-color: #9397b83b;
+        }
+
+        .photo-text {
+            display: flex;
+            width: 100%;
+        }
+
+        .photo-text div {
+            margin-right: 20px;
+        }
+
+        .title {
+            color: #000;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        p {
+            color: var(--paragraph-color);
+            font-size: 16px;
+            flex-grow: 1;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        note {
+            font-size: 14px;
+            padding: 2px 8px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .lang-container {
+            margin-left: auto;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -250px 0; }
+            100% { background-position: 250px 0; }
+        }
+
+        .loading {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f6f7f8;
+            background-image: linear-gradient(90deg, #f6f7f8 25%, #e0e0e0 50%, #f6f7f8 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            z-index: 5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+            <h1>Easily</h1>
+            <div class="lang-container">
+                <select class="form-select lang">
+                    <option value="en" selected>En</option>
+                    <option value="ru">Ru</option>
+                </select>
+            </div>
+        </div>
+        <div class="buttons" id="buttons-container">
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script>
+        const buttonsData = {{ buttons_data | tojson | safe }};
+
+        if (!localStorage.getItem('selectedLang')) {
+            localStorage.setItem('selectedLang', 'en');
+        }
+
+        const cutText = function (text, length, id) {
+            const savedLang = localStorage.getItem('selectedLang');
+            return text.length >= length ? text.slice(0, length) + `&hellip; <a href="/situation/${id}/${savedLang}` + '">read more</a>' : text;
+        }
+
+        const langSelect = document.querySelector('.lang');
+
+        langSelect.addEventListener('change', function() {
+            const selectedLang = langSelect.value;
+            localStorage.setItem('selectedLang', selectedLang);
+            window.location.href = `/${selectedLang}`;
+        });
+
+        const buttonsContainer = document.getElementById('buttons-container');
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const savedLang = localStorage.getItem('selectedLang');
+            if (savedLang) {
+                langSelect.value = savedLang;
+            }
+
+            lottie.setQuality('low');
+
+            let idLoad = 0;
+
+            if (Array.isArray(buttonsData)) {
+                await buttonsData.forEach(({ situation_id, title, animation, description, count }, i) => {
+                    if (situation_id && title && animation && description && count) {
+                        const buttonDiv = document.createElement('div');
+                        const linkContainer = document.createElement('a');
+                        linkContainer.href = `/situation/${situation_id}/${savedLang}`;
+                        buttonDiv.classList.add('button');
+
+                        const titleElement = document.createElement('div');
+                        titleElement.classList.add('title');
+                        titleElement.textContent = title;
+
+                        const photoTextDiv = document.createElement('div');
+                        photoTextDiv.classList.add('photo-text');
+
+                        const animationDiv = document.createElement('div');
+                        animationDiv.id = situation_id;
+                        animationDiv.classList.add('image');
+                        const skeletonDiv = document.createElement('div');
+                        skeletonDiv.classList.add('loading');
+
+                        animationDiv.style.minWidth = '100px';
+                        animationDiv.style.minHeight = '100px';
+                        animationDiv.style.maxWidth = '100px';
+                        animationDiv.style.maxHeight = '100px';
+
+                        const descriptionElement = document.createElement('p');
+                        descriptionElement.appendChild(titleElement);
+                        descriptionElement.innerHTML += cutText(description, 46, situation_id);
+                        
+                        const recordText = savedLang === 'ru' ? ' записи' : ' records';
+                        descriptionElement.innerHTML += `<br><note>${count > 1 ? count + recordText : count + recordText.slice(0, -1)}</note>`;
+
+                        animationDiv.appendChild(skeletonDiv);
+                        photoTextDiv.appendChild(animationDiv);
+                        photoTextDiv.appendChild(descriptionElement);
+
+                        buttonDiv.appendChild(photoTextDiv);
+                        linkContainer.appendChild(buttonDiv);
+                        buttonsContainer.appendChild(linkContainer);
+
+                        const animationPromise = fetch(`/static/${animation}`)
+                            .then(response => response.json())
+                            .then(async animationData => {
+                                skeletonDiv.classList.remove('loading');
+                                    
+                                await lottie.loadAnimation({
+                                    container: animationDiv,
+                                    renderer: 'svg',
+                                    loop: true,
+                                    autoplay: true,
+                                    animationData: animationData
+                                });
+
+                                if(idLoad == buttonsData.length - 1) {
+                                    lottie.unfreeze();
+                                } else {
+                                    lottie.freeze();
+                                }
+
+                                idLoad++;
+                            }).catch(error => {
+                                console.error('Error loading animation:', error);
+                            });
+                    } else {
+                        console.error('Missing data for button:', { situation_id, title, animation, description });
+                    }
+                });
+            } else {
+                console.error('buttonsData is not an array:', buttonsData);
+            }
+        });
+    </script>
+</body>
+
+</html>

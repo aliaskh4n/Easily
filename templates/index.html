@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easily - Жоба туралы ақпарат</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <h1>Easily</h1>
+        </div>
+
+        <div class="content">
+            <a href="#about-us">
+                <h2 id="about-us">
+                    Біз туралы
+                </h2>
+            </a>
+            <p>
+                Easily сайты Қазақстанда қарым-қатынасты жеңілдету және түсінуді арттыру мақсатында құрылған.
+                Сайтта қазақ тіліне аудармалар мен аудиолар ұсынылған, бұл туристер мен елге келген қонақтарға
+                жергілікті тұрғындармен оңай қарым-қатынас жасауға, жергілікті әдет-ғұрыптар мен мәдениетті түсінуге
+                мүмкіндік береді.
+                Бұл ресурс Қазақстан бойынша саяхатты тереңірек және бай етіп жасауға көмектеседі, оны кең аудиторияға
+                қолжетімді етеді.
+                Сайттағы әртүрлі функциялар интерфейсті ыңғайлы және түсінікті етіп қамтамасыз етеді, оны осы
+                керемет елге барғысы келетіндердің барлығы үшін тамаша ресурс етеді.
+            </p>
+
+            <button onclick="openWindow()">Өту</button>
+
+            <!-- График пен анимацияны қосу -->
+            <div class="chart-container">
+                <canvas id="myChart"></canvas>
+
+                <div class="section">
+                    <a href="#animation">
+                        <h2 id="animation">
+                            Анимация
+                        </h2>
+                    </a>
+                    <div class="animation-container" id="animationContainer"></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <a href="#target">
+                    <h2 id="target">
+                        Жобаның мақсаты
+                    </h2>
+                </a>
+                <p>Туристердің өздерін сенімді және ыңғайлы сезінулері үшін әртүрлі жағдайлар үшін дайын қазақ тіліне
+                    аудармалар және аудио нұсқаларды ұсыну.</p>
+            </div>
+
+            <div class="section">
+                <a href="#main-section">
+                    <h2 id="main-section">
+                        Сайттың негізгі бөлімдері
+                    </h2>
+                </a>
+                <div class="blocks">
+                    <ul>
+                        <li>
+                            <img
+                                src="https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/256/3849EA/external-folder-vdo-production-xnimrodx-lineal-xnimrodx.png">
+                            <p>
+                                <b>Сценарийлер</b><br>
+                                Дүкендерге, мейрамханаларға, медициналық мекемелерге, көлік құралдарына және басқа да
+                                жерлерге баруды қамтитын әртүрлі сценарийлерді ұсыну.
+                            </p>
+                        </li>
+                        <li>
+                            <img src="https://img.icons8.com/ios/256/3849EA/term.png">
+                            <p>
+                                <b>Сөз тіркестері мен сөздер</b><br>
+                                Әрбір жағдайға арналған дайын қазақ тіліндегі сөз тіркестері мен сөздер, сондай-ақ
+                                олардың аудио нұсқалары.
+                            </p>
+                        </li>
+                        <li>
+                            <img src="https://img.icons8.com/windows/256/3849EA/teacher.png">
+                            <p>
+                                <b>Оқу материалдары</b><br>
+                                Қазақ тілін үйренуге арналған материалдар, жаңадан бастаушылар үшін негізгі сөздер мен
+                                грамматика.
+                            </p>
+
+                        </li>
+                        <li>
+                            <img src="https://img.icons8.com/windows/256/3849EA/blog.png">
+                            <p>
+                                <b>Блог</b><br>
+                                Қазақстан мәдениеті, дәстүрлері және ерекшеліктері туралы мақалалар, туристерге кеңестер,
+                                сайт жаңалықтары мен жаңартулары.
+                            </p>
+                        </li>
+                        <li>
+                            <img src="https://img.icons8.com/sf-regular/256/3849EA/contacts.png">
+                            <p>
+                                <b>Байланыс</b><br>
+                                Кері байланыс, сайт әкімшілігімен байланыс формасы.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <a href="#stack">
+                    <h2 id="stack">
+                        Бағдарламалау тілдері мен технологиялар
+                    </h2>
+                </a>
+                <div class="blocks lif">
+                    <ul>
+                        <li>
+                            <img src="https://img.icons8.com/ios-glyphs/256/3849EA/python.png">
+                            <p>
+                                <b>Python</b><br>
+                                Бэкенд-дамыту үшін қолданылды, сервер бөлігін жазу үшін Flask қолданылды.
+                            </p>
+                        </li>
+
+                        <li>
+                            <img src="https://img.icons8.com/ios/256/3849EA/html-5--v2.png">
+                            <p>
+                                <b>HTML/CSS/JS</b><br>
+                                Фронтенд-дамыту үшін қолданылды, қолданушы интерфейсін, стильдерді және сайттың клиенттік
+                                логикасын жасау үшін.
+                            </p>
+                        </li>
+
+                        <li>
+                            <img
+                                src="https://img.icons8.com/external-line-adri-ansyah/256/3849EA/external-tools-design-tools-1-line-adri-ansyah-10.png">
+                            <p>
+                                <b>Lottie</b><br>
+                                Сайтта анимациялар жасау үшін қолданылды, бұл сайтқа интерактивті және тартымды көрініс
+                                береді.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <a href="#structure">
+                    <h2 id="structure">
+                        Сайт архитектурасы мен құрылымы
+                    </h2>
+                </a>
+                <ul>
+                    <li><strong>Бэкенд:</strong> Пайдаланушы сұрауларын өңдеу және SQLite3 дерекқорымен өзара әрекеттесу
+                        үшін Python тілінде Flask қолданып жасалған.</li>
+                    <li><strong>Фронтенд:</strong> Интерфейсті жасау, деректерді визуализациялау және сайт элементтерін
+                        басқару үшін HTML, CSS және JS қолданылған.</li>
+                    <li><strong>Анимациялар:</strong> Lottie қолданылып, пайдаланушы тәжірибесін жақсарту және мазмұнды
+                        визуализациялау үшін қосылған.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <a href="#infrastructure">
+                    <h2 id="infrastructure">
+                        Инфрақұрылым және орнату
+                    </h2>
+                </a>
+                <ul>
+                    <li><strong>Хостинг:</strong> Сайт Python және Flask қолдайтын веб-серверде орналастырылған.</li>
+                    <li><strong>Дерекқор:</strong> Сервердегі деректерді сақтау үшін SQLite3 қолданылады.</li>
+                    <li><strong>Анимациялар мен мультимедиа:</strong> Lottie сайт беттеріне анимациялар мен мультимедиа
+                        мазмұнын тиімді интеграциялауға мүмкіндік береді.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <a href="#contacts">
+                    <h2 id="contacts">
+                        Байланыс
+                    </h2>
+                </a>
+                <p>Бізбен Telegram арқылы байланыса аласыз: @aliaskhan</p>
+
+                <!-- Серіктес сілтемесі -->
+                <a href="https://msghub.ru/" style="text-decoration: none; color: inherit;">
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        design assistance
+                        <div
+                            style="padding: 8px; width: 100px;display: flex;justify-content: center;border-radius: 8px">
+                            <img src="https://msghub.ru/icon/onion.svg"
+                                style="width: inherit;transform: translateY(1px);-webkit-transform: translateY(1px)">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="window">
+        <div class="window-child">
+            <div class="close">
+                <img src="https://img.icons8.com/material-rounded/64/000000/delete-sign.png" onclick="closeWindow()">
+            </div>
+            <center>
+                <h2>QR-кодты сканерлеңіз</h2>
+                <img src="{{ url_for('static', filename='qr.svg') }}">                
+            </center>
+        </div>
+    </div>
+
+    <!-- Кітапханалар мен скрипттерді қосу -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Қазақша сөздер', 'Орысша сөздер', 'Ағылшынша сөздер'],
+                datasets: [{
+                    data: [45, 30, 25],
+                    borderWidth: 1,
+                    backgroundColor: ['#F93434', '#345FF9', '#F9CD34']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                family: "'Montserrat', sans-serif",
+                                weight: 600
+                            },
+                            color: "#000"
+                        }
+                    },
+
+                    tooltip: {
+                        titleFont: {
+                            family: "'Montserrat', sans-serif",
+                            weight: 600
+                        },
+                        bodyFont: {
+                            family: "'Montserrat', sans-serif",
+                            weight: 600
+                        },
+                        callbacks: {
+                            label: function (context) {
+                                let label = context.parsed || '';
+                                return " " + label + "%";
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const animationDiv = document.getElementById('animationContainer');
+        const animationPromise = fetch('static/animation.json')
+        .then(response => response.json())
+        .then(animationData => {
+            lottie.loadAnimation({
+                container: animationDiv,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                animationData: animationData
+            });
+        }).catch(error => {
+            console.error('Error loading animation:', error);
+        });
+
+        function openWindow() {
+            document.querySelector('.window').style.display = "flex";
+        }
+        
+        function closeWindow() {
+            document.querySelector('.window').style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
